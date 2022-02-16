@@ -1,0 +1,2 @@
+# DirectoryHashCalculator
+ディレクトリのハッシュ計算

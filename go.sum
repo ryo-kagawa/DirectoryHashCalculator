@@ -1,0 +1,3 @@
+github.com/ryo-kagawa/go-utils v0.0.0-20210519140154-16fe120f7de2 h1:yARwqL5Z/CHnmdWt8wTAjamUH/Tb+FhYaawxz/ZH08U=
+github.com/ryo-kagawa/go-utils v0.0.0-20210519140154-16fe120f7de2/go.mod h1:24dG9ouJZWuWBkJ90ghVAC/5Iqb8fjLSjtUHt6fBVRw=
+golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=

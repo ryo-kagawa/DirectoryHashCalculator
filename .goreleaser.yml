@@ -1,0 +1,24 @@
+builds:
+  -
+    id: DirectoryHashCalculator
+    main: ./cmd/directory-hash-calculator
+    binary: DirectoryHashCalculatorapp1
+    ldflags:
+      - -s -w -X main.version=v{{ .Version }}
+    targets:
+      - darwin_arm64
+      - linux_amd64
+      - windows_amd64
+
+archives:
+  -
+    id: DirectoryHashCalculator
+    builds:
+      - DirectoryHashCalculator
+    format_overrides:
+      -
+        goos: windows
+        format: zip
+
+release:
+  draft: true

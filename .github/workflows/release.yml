@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release Tag format is Semver
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: checkout
+      uses: actions/checkout@v2
+      with:
+        # goreleaserでコミットログを作成するために必要
+        fetch-depth: 0
+    -
+      name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.17.7
+    -
+      name: Run go vet
+      run: |
+        go vet ./...
+    -
+      name: Run Test
+      run: |
+        go test --race ./...
+    -
+      name: Add Tag
+      run: |
+        [[ ${{ github.event.inputs.tag }} =~ ^v(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-((0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(\+([0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*))? ]]
+        git tag ${{ github.event.inputs.tag }}
+        git push origin ${{ github.event.inputs.tag }}
+    -
+      name: Generate Licenses
+      run: |
+        go install github.com/google/go-licenses@latest
+        go-licenses save ./... --force --save_path="./licenses"
+    -
+      name: Run GoReleaser
+      uses: goreleaser/goreleaser-action@v2
+      with:
+        version: latest
+        args: release --rm-dist
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

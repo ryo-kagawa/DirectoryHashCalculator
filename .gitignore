@@ -13,3 +13,6 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# GoReleaserでパイプラインで作成しているものが.gitignoreに登録されていない場合はエラーになるので記載する
+licenses/

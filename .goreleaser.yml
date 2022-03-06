@@ -2,7 +2,7 @@ builds:
   -
     id: DirectoryHashCalculator
     main: ./cmd/directory-hash-calculator
-    binary: DirectoryHashCalculatorapp1
+    binary: DirectoryHashCalculator
     ldflags:
       - -s -w -X main.version=v{{ .Version }}
     targets:
